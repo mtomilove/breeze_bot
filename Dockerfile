@@ -1,12 +1,11 @@
-FROM postgres:16.3
+FROM python:3.12-slim
 
-# Устанавливаем необходимые пакеты для поддержки локалей
-RUN apt-get update && \
-    apt-get install -y locales && \
-    rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-# Генерируем локаль ru_RU.UTF-8
-RUN localedef -i ru_RU -c -f UTF-8 -A /usr/share/locale/locale.alias ru_RU.UTF-8
+COPY requirements.txt requirements.txt
 
-# Устанавливаем переменные окружения для локали
-ENV LANG ru_RU.utf8
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD ["python", "cli.py", "start", "api"]
