@@ -1,6 +1,8 @@
 from dependency_injector import containers, providers
 
 from breeze_bot.handlers.bid_categories import BidCategoriesHandler
+from breeze_bot.handlers.managers import ManagersHandler
+from breeze_bot.handlers.positions import PositionsHandler
 from breeze_bot.infra.database.session import async_session_factory
 from breeze_bot.handlers.bids import BidsHandler
 from breeze_bot.handlers.employees import EmployeesHandler
@@ -33,8 +35,8 @@ class Container(containers.DeclarativeContainer):
 
     bids_handler = providers.Singleton(BidsHandler, bids_repository=bids_repository)
     employees_handler = providers.Singleton(EmployeesHandler, employees_repository=employees_repository)
-    positions_handler = providers.Singleton(PositionsRepository, positions_repository=positions_repository)
-    managers_handler = providers.Singleton(ManagersRepository, managers_repository=managers_repository)
+    positions_handler = providers.Singleton(PositionsHandler, positions_repository=positions_repository)
+    managers_handler = providers.Singleton(ManagersHandler, managers_repository=managers_repository)
     bid_categories_handler = providers.Singleton(
         BidCategoriesHandler, bid_categories_repository=bid_categories_repository
     )

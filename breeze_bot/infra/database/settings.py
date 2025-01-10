@@ -9,9 +9,6 @@ class PGSettings(BaseSettings):
     username: str
     password: str
     name: str
-    echo: bool
-    pool_size: int
-    max_overflow: int
 
     model_config = SettingsConfigDict(env_prefix='PG_')
 

@@ -7,12 +7,7 @@ from breeze_bot.infra.database.settings import settings
 
 @lru_cache(maxsize=1, typed=True)
 def async_engine() -> AsyncEngine:
-    return create_async_engine(
-        url=settings.url,
-        echo=settings.echo,
-        pool_size=settings.pool_size,
-        max_overflow=settings.max_overflow,
-    )
+    return create_async_engine(url=settings.url, echo=False, pool_size=5, max_overflow=10)
 
 
 @lru_cache(maxsize=1, typed=True)
